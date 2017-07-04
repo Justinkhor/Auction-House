@@ -92,7 +92,7 @@
       <th>Highest Bid</th>
       <th></th>
     </tr>
-    <% @listing.bids.each do |bid| %>
+    <% @listing.bids.order("bidding_price DESC").each do |bid| %>
     <tr>
     <% if bid.id != nil %>
     <td><%= bid.user.username %></td>

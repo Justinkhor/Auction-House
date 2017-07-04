@@ -27,9 +27,9 @@ class ListingsController < ApplicationController
   end
 
   def search
-    @listings = Listing.search(params[:term], fields: ["state", "city", "address", "name"], misspellings: {below: 5}).paginate(:page => params[:page]).per_page(20)
+    @listings = Listing.search(params[:term], fields: ["state", "city", "address", "name"], misspellings: {below: 5})#.paginate(:page => params[:page]).per_page(20)
     if @listings.blank?
-      redirect_to root_path, flash:{danger: "no successful search result"}
+      redirect_to root_path, flash:{danger: "No results found!"}
     else
       render :search
     end
