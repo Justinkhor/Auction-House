@@ -26,9 +26,17 @@
 </div>
 
   <br><br>
-  <div class = "container-fluid">
-  <h2>New Listings</h2>
-  <% @listings.each do |l| %>
-    <%= link_to l.name, listing_path(l) %>
-  <% end %>
-</div>
+    <h2>Featured Listings</h2><br>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <% @listings.each do |listing| %>
+        <div class="responsive">
+          <div class="gallery">
+            <%= link_to image_tag(listing.images.first.image.thumb.url), listing if listing.images.present? %>
+            <div class="desc"><%= listing.name %> RM<%= listing.price %></div>
+          </div>
+        </div>
+       <% end %>
+      </div>
+    </div>
+    <%= will_paginate @listings %>
