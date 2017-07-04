@@ -1,6 +1,6 @@
 <div id = "big_container">
 <% if !@listing.bids.empty? %>
-  <h1> CURRENT HIGHEST BID IS RM<%= @bid.bidding_price %></h1>
+  <h1> CURRENT HIGHEST BID IS RM<%= @listing.bids.find_by(chosen_bid: true).bidding_price  %></h1>
 <% else %>
   <h1> THERE IS NO BID AT THE MOMENT! BE THE FIRST BIDDER! </h1>
 <% end %>

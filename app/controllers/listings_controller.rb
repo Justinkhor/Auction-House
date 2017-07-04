@@ -36,7 +36,6 @@ class ListingsController < ApplicationController
   end
 
   def show
-    @bid = @listing.bids.find_by(chosen_bid: true)
   end
 
   def edit
