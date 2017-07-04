@@ -1,0 +1,46 @@
+
+<div class = "container col-md-offset-4 col-md-4 col-md-offset-4">
+<h1>New Listing</h1><br>
+
+<%= form_for(@listing, :html => { multipart: true }) do |f| %>
+
+  Name: <%= f.text_field :name %><br><br>
+  Type: <%= f.select :house_type, ['Bungalow', 'Single Terrace', 'Double Terrace', 'Condominium', 'Apartment', 'Semi D'] %><br><br>
+  Address: <%= f.text_field :address %><br><br>
+  City: <%= f.text_field :city %><br><br>
+  State: <%= f.select :state, ['Kuala Lumpur', 'Selangor', 'Perak', 'Melaka', 'Negeri Sembilan', 'Pahang', 'Johor', 'Kedah', 'Pulau Pinang', 'Perlis', 'Kelantan', 'Terengganu', 'Sarawak', 'Sabah'] %><br><br>
+  Number Of Rooms: <%= f.number_field :num_of_rooms %><br><br>
+  Starting Price: RM <%= f.number_field :price %><br><br>
+  Expiration Date:  <div class="container">
+                      <div class="row">
+                          <div class='col-sm-4'>
+                              <div class="form-group">
+                                  <div class='input-group date' id='datetimepicker5'>
+                                      <%= f.text_field :expiration, class: 'form-control' %>
+                                      <span class="input-group-addon">
+                                          <span class="glyphicon glyphicon-calendar"></span>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                          <script type="text/javascript">
+                              $(function () {
+                                  $('#datetimepicker5').datetimepicker({
+                                      minDate: moment(),
+                                  });
+                              });
+                          </script>
+                      </div>
+                  </div>
+
+                  <%= f.fields_for :image do |ff| %>
+                      <div class="field" id='uploadavatar'>
+                        <%= ff.label :image %><br>
+                        <%= ff.file_field :image, multiple: true, name: "images[]" %>
+                      </div>
+                    <% end %>
+                    <br><br>
+  <%= f.submit "Create" %>
+
+<% end %>
+</div>

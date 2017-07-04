@@ -1,0 +1,3 @@
+console.log('testing')
+$('#bid_table tr:first').after("<%= escape_javascript(render partial: 'bid', locals: {bid: @bid}) %>")
+$('#big_container').html()

@@ -1,0 +1,57 @@
+
+<div class = "container col-md-offset-3 col-md-6 col-md-offset-3">
+<h1>Profile</h1><br>
+
+<% if current_user.avatar != nil%>
+<%= image_tag(current_user.avatar.url, :class =>'img-circle') %>
+<% end %>
+<br><br>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.first_name %> <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<% if current_user.id = @user.id %>
+<%= link_to 'Edit', edit_user_path(@user) %>
+<% end %>
+<br><br>
+
+<h2>Bids</h2>
+<br>
+<table>
+  <tr>
+    <th>Listing Name</th>
+    <th>Bidding Price</th>
+    <th>Winning Bid?</th>
+    <th>Paid?</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @bids.each do |bid| %>
+<tr>
+  <td><%= link_to bid.listing.name, bid.listing %></td>
+  <td><%= bid.bidding_price %></td>
+  <td><%= bid.chosen_bid %></td>
+  <td><%= bid.payment_made %></td>
+    <% if bid.payment_made == false %>
+  <td><%= link_to "Make Payment", new_reservation_braintree_path(reservation) %></td>
+    <% else %>
+  <td></td>
+    <% end %>
+  <td><%= link_to "Delete Bid", bid, method: :delete %></td>
+</tr>
+<% end %>
+</table>
+
+<br>
+</div>

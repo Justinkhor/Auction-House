@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalAssessment</title>
+    <title>Auction House</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fresca">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB1OJ2LVjPpwrxpiT1qQNEzrdo40juTQDk&libraries=places" type="text/javascript"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
   </head>
 
   <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navMain">
+              <span class="glyphicon glyphicon-chevron-right" style="color:white;"></span>
+
+            </button>
+            <a class="navbar-brand" href="/">Auction House</a>
+          </div>
+          <ul class="nav navbar-nav">
+          </ul>
+          <div class="collapse navbar-collapse" id="navMain">
+            <ul class="nav navbar-nav pull-right">
+              <% if current_user %>
+                <% if current_user.role == "admin" %>
+                <li>
+                  <%= link_to new_listing_path(current_user) do %>
+                  Add New Listing
+                  <% end %>
+                </li>
+                <% end %>
+
+                <% if current_user.user? %>
+                <li>
+                  <%= link_to user_path(current_user) do %>
+                  <%= current_user.first_name %>
+                  <% end %>
+                </li>
+
+                <% else %>
+                <li>
+                <div class="dropdown">
+                  <%= link_to user_path(current_user)  do %>
+                  Admin: <%= current_user.first_name %>
+                  <% end %>
+                  <div id="myDropdown" class="dropdown-content">
+                    <%= link_to 'View all Users', users_path %>
+                    <%= link_to 'View all Listings', listings_path %>
+                  </div>
+                </div>
+                <% end %>
+              </li>
+            <li>
+              <%= link_to "Logout", '/logout' %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to 'Login', '/login' %>
+            </li>
+            <li>
+            <%= link_to 'Signup', '/signup' %>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+    <p id="notice"><%= flash[:notice] %></p>
     <%= yield %>
   </body>
 </html>

@@ -1,0 +1,22 @@
+<div id = "big_container">
+<% if !@listing.bids.empty? %>
+  <h1> CURRENT HIGHEST BID IS RM<%= @bid.bidding_price %></h1>
+<% else %>
+  <h1> THERE IS NO BID AT THE MOMENT! BE THE FIRST BIDDER! </h1>
+<% end %>
+
+<br>
+  <% if @listing.user_id != current_user.id %>
+    <% if @bid != nil %>
+      <% if @bid.user_id != current_user.id %>
+      <h1> BID NOW! </h1>
+        <%= render 'bids/form' %>
+      <% else %>
+      <h1> YOU ARE THE CURRENT HIGHEST BIDDER! </h1>
+      <% end %>
+    <% else %>
+    <h1> BID NOW! </h1>
+      <%= render 'bids/form' %>
+    <% end %>
+  <% end %>
+</div>

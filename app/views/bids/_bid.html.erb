@@ -1,0 +1,10 @@
+<tr>
+<% if bid.id != nil %>
+<td><%= bid.user.username %></td>
+<td><%= bid.bidding_price %></td>
+<td><%= bid.chosen_bid %></td>
+<% if current_user.role == "admin" %>
+<td><%= link_to "Delete Bid", bid, method: :delete %></td>
+<% end %>
+<% end %>
+</tr>

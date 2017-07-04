@@ -1,0 +1,6 @@
+<%= form_for([@listing, @listing.bids.new],remote: true) do |f| %>
+
+  Bidding Price: <%= f.number_field :bidding_price %><br><br>
+
+  <%= f.submit "Bid Now" %><br><br>
+<% end %>
