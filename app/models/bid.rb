@@ -1,7 +1,8 @@
 class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :listing
-  validate :check_chosen_bid, on: :buy_process
+  validates :bidding_price, presence: true
+  validate :check_chosen_bid
 
   def check_chosen_bid
     return if self.chosen_bid == true

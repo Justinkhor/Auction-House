@@ -33,25 +33,39 @@
     <th>Listing Name</th>
     <th>Bidding Price</th>
     <th>Winning Bid?</th>
-    <th>Paid?</th>
-    <th></th>
-    <th></th>
   </tr>
 <% @bids.each do |bid| %>
 <tr>
   <td><%= link_to bid.listing.name, bid.listing %></td>
   <td><%= bid.bidding_price %></td>
   <td><%= bid.chosen_bid %></td>
-  <td><%= bid.payment_made %></td>
-    <% if bid.payment_made == false %>
-  <td><%= link_to "Make Payment", new_reservation_braintree_path(reservation) %></td>
-    <% else %>
-  <td></td>
-    <% end %>
-  <td><%= link_to "Delete Bid", bid, method: :delete %></td>
 </tr>
 <% end %>
 </table>
 
 <br>
+
+<h2>Listings Won</h2>
+<br>
+<table>
+  <tr>
+    <th>Listing Name</th>
+    <th>Bidding Price</th>
+    <th>Paid?</th>
+    <th></th>
+  </tr>
+<% @listings.each do |listing| %>
+<tr>
+  <td><%= link_to listing.name, listing %></td>
+  <td><%= listing.bids.order("bidding_price DESC").first.bidding_price %></td>
+  <td><%= listing.paid %></td>
+    <% if listing.paid == false %>
+  <td><%= link_to "Make Payment", new_listing_braintree_path(listing) %></td>
+    <% else %>
+  <td></td>
+    <% end %>
+</tr>
+<% end %>
+</table>
+
 </div>

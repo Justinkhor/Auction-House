@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :users
   resources :listings do
     resources :bids, only: [:create]
+    resources :braintree, only: [:new, :create]
   end
   resources :images, only: [:destroy]
   resources :bids, except: [:create]

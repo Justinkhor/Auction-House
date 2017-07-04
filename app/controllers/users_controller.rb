@@ -23,6 +23,8 @@ class UsersController < ApplicationController
 
   def show
     @bids = current_user.bids.all
+    listing_ids = current_user.bids.where(chosen_bid: true).pluck(:listing_id)
+    @listings = Listing.where(id: listing_ids)
   end
 
   def edit
