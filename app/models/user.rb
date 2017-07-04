@@ -29,6 +29,6 @@ class User < ApplicationRecord
 end
 
   def set_default_role
-    self.role = :user
+    self.role = :admin
   end
 end
