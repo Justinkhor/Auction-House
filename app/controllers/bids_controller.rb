@@ -1,7 +1,5 @@
 class BidsController < ApplicationController
-  before_action :require_login, only: [:show, :edit, :update, :destroy]
-
-
+  
 	def index
     @bids = Bid.all.order('created_at DESC')#.paginate(:page => params[:page]).per_page(20)
 	end
